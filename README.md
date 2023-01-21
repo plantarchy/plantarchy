@@ -1,3 +1,3 @@
 # plantarchy
 
-this shi gon be curzy
+A Farming io game inspired by r/Place
