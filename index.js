@@ -3,19 +3,23 @@ const API_URL = "https://c829-128-210-107-129.ngrok.io"
 async function Index() {
     document.getElementById("konva-holder").style.display = "block";
     document.getElementById("signup").style.display = "none";
-    const game_code = document.getElementById("game-code")
-    const username = document.getElementById("name-input");
+    const game_code = document.getElementById("game-code").value
+    const username = document.getElementById("name-input").value;
     console.log(document.getElementById("name-input").value);
     // const res = await fetch(API_URL + "/games");
     // const data = await res.json();
     // console.log(data)
     const res = await fetch(API_URL + "/login", {
       method: "POST",
-      body: {
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
         game_code: game_code,
-        username: username
-      }
-    })
+        player_name: username
+      })
+    });
     if (res.status === 400) {
       alert("Error 400");
     }
@@ -24,6 +28,7 @@ async function Index() {
     }
     const data = await res.json();
     console.log(data);
+    window.playerID = data.player;
 }
 const stage = new Konva.Stage({
   height: window.innerHeight,
