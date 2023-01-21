@@ -1,5 +1,3 @@
-const log = console.log;
-
 const stage = new Konva.Stage({
   height: window.innerHeight,
   width: window.innerWidth,
@@ -8,7 +6,6 @@ const stage = new Konva.Stage({
 
 const layer = new Konva.Layer();
 stage.add(layer);
-
 
 const gridSize = 30;
 // double for to create every grid in the window
@@ -35,14 +32,15 @@ for(w = 0; w < window.innerWidth; w += gridSize) {
     
 
     // mouse listeners
+    // this.x() / gridSize lets Vincent's DB take it as (1, 0) (17, 11)
     grid.on('mousedown', function () {
       console.log("mouse down", this.x() / gridSize, this.y() / gridSize);
     });
-    // this.x() / gridSize lets Vincent's DB take it as (1, 0) (17, 11)
     grid.on('mouseup', function () {
       console.log("mouse up", this.x() / gridSize, this.y() / gridSize);
     });
   }
+  // adds vertical line for separation
   const verticalLine = new Konva.Line({
     points: [w, 0, w, window.innerHeight],
     stroke: 'black',
@@ -52,9 +50,4 @@ for(w = 0; w < window.innerWidth; w += gridSize) {
   })
   layer.add(verticalLine)
 
-  
 }
-
-
-
-
