@@ -40,33 +40,31 @@
 
     <script>
       document.getElementById("image").addEventListener("mouseover", function() {
-        document.getElementById("image").classList.add("bounce");
+
+        document.getElementById("image").src="./angryplant.png";
+        document.getElementById("image").classList.add("shake");
+
         var millisecondsToWait = 300;
         setTimeout(function() {
-          document.getElementById("image").src="./angryplant.png";
-          document.getElementById("image").classList.remove("bounce");
+          document.getElementById("image").classList.remove("shake");
 
         }, millisecondsToWait);
 
       });
       document.getElementById("image").addEventListener("mouseout", function() {
-        document.getElementById("image").classList.add("bounce");
+        document.getElementById("image").src="./happyplant.png";
+        document.getElementById("image").classList.add("shake");
+
         var millisecondsToWait = 300;
         setTimeout(function() {
-          document.getElementById("image").src="./happyplant.png";
-          document.getElementById("image").classList.remove("bounce");
+          document.getElementById("image").classList.remove("shake");
+
 
         }, millisecondsToWait);
 
       });
     </script>  
     <div class="form1">
-      <!--
-        <section>
-        <img class="bottom" src="https://placeimg.com/640/480/nature">
-        <img class="top" src="https://placeimg.com/640/480/arch">
-      </section>
-    -->
       <input id="name-input" class="un" type="text" align="center" placeholder="Nickname">
       <input id="game-code" class="gc" type="text" align="center" placeholder="Game Code">
       
