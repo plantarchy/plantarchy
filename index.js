@@ -119,8 +119,6 @@ async function init() {
         const data = await res.json();
         console.log(data);
 
-        cell.setAttr("fill", garden.grid[cellX][cellY].color);
-        cell.draw();
       });
       layer.add(cell)
     }
