@@ -48,7 +48,7 @@ stage.add(layer);
 const GARDEN_X = 50;
 const GARDEN_Y = 50;
 
-let garden = new Garden(20,20,50);
+let garden = new Garden(35,35,25);
 window.garden = garden;
 // double for to create every grid in the window
 
