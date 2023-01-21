@@ -14,3 +14,4 @@ class Garden {
         this.height = height;
     }
 }
+
