@@ -7,15 +7,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <title>Plantarchy</title>
+
+  <script src="https://unpkg.com/konva@8.4.2/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #konva-holder {
+        height: 100vh;
+        width: 100vw;
+        display: none;
+      }
+
+      #controls {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+      }
+      
+    </style>
 </head>
 
 <body>
-  <div class="main">
+<div id="konva-holder"></div>
+  <div class="main" id="signup">
     <p class="sign" align="center">Plantarchy</p>
     <form class="form1">
       
-      <input class="un" type="text" align="center" placeholder="Nickname">
-      <a class="submit" align="center" href="index.html">Sign in</a>         
+      <input id="name-input" class="un" type="text" align="center" placeholder="Nickname">
+      <script type="text/javascript" src="index.js"></script>
+      <button class="submit" onclick="Index();">Sign in!</button>
+              
     </div>   
 </body>
 
