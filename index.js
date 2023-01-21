@@ -33,9 +33,8 @@ for(w = 0; w < window.innerWidth; w += gridSize) {
     })
     layer.add(horizontalLine)
     
-    
 
-
+    // mouse listeners
     grid.on('mousedown', function () {
       console.log("mouse down", this.x() / gridSize, this.y() / gridSize);
     });
