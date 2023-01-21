@@ -1,3 +1,9 @@
+const log = console.log;
+function Index() {
+    document.getElementById("konva-holder").style.display = "block";
+    document.getElementById("signup").style.display = "none";
+    console.log(document.getElementById("name-input").value);
+}
 const stage = new Konva.Stage({
   height: window.innerHeight,
   width: window.innerWidth,
