@@ -106,6 +106,7 @@ async function init() {
             x: cellX,
             y: cellY,
             player_uuid: window.playerID,
+            game_uuid: window.gameID,
             crop: 1
           })
         });
