@@ -4,7 +4,6 @@ public class Garden {
     public int width;
     public int height;
     public int cellSize;
-    public Plantarchy pl;
 
     public Garden(int width, int height, int cellSize) {
         this.width = width;
@@ -42,6 +41,7 @@ public class Garden {
             Plantarchy.seeds--;
         } else if (grid[cellX][cellY].state == 4) {
             grid[cellX][cellY].state = 3;
+            Plantarchy.berries++;
         }
     }
 

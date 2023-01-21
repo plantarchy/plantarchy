@@ -7,6 +7,11 @@ import java.io.BufferedReader;
 
 public class GUI extends JFrame {
 
+    JPanel borderPanel;
+    JPanel leftPanel;
+    JPanel rightPanel;
+    JLabel seeds;
+    JLabel berries;
     Garden garden;
     public final int WING_BUFFER = 200;
     public final int GARDEN_X = 50;
@@ -29,7 +34,6 @@ public class GUI extends JFrame {
                 repaint();
             }
         });
-
     }
 
     private void initUI() {
@@ -39,11 +43,24 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setBackground(new Color(40, 20, 10));
         this.repaint();
+
+        borderPanel = new JPanel(new BorderLayout());
+        leftPanel = new JPanel();
+        rightPanel = new JPanel();
+        add(borderPanel);
+        borderPanel.add(leftPanel, BorderLayout.WEST);
+        borderPanel.add(rightPanel, BorderLayout.EAST);
+
+        seeds = new JLabel("Seeds: ");
+        berries = new JLabel("Berries: ");
+
+        leftPanel.add(seeds);
+        rightPanel.add(berries);
+
     }
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
         dbImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
         dbg = dbImage.getGraphics();
         paintComponent(dbg);
@@ -51,6 +68,8 @@ public class GUI extends JFrame {
     }
 
     public void paintComponent(Graphics g) {
+        seeds.setText("Seeds: " + Plantarchy.seeds);
+        berries.setText("Berries: " + Plantarchy.berries);
         for (int i = 0; i < garden.width; i++) {
             for (int j = 0; j < garden.height; j++) {
                 switch (garden.getPlant(i, j).state) {
@@ -60,7 +79,7 @@ public class GUI extends JFrame {
                     case 3 -> g.setColor(new Color(60, 120, 0));
                     case 4 -> g.setColor(new Color(240, 10, 100));
                 }
-                dbg.fillRect(GARDEN_X + i * garden.cellSize + WING_BUFFER, +GARDEN_Y + j * garden.cellSize, garden.cellSize, garden.cellSize);
+                g.fillRect(GARDEN_X + i * garden.cellSize + WING_BUFFER, +GARDEN_Y + j * garden.cellSize, garden.cellSize, garden.cellSize);
             }
         }
     }
