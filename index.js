@@ -1,5 +1,7 @@
+const socket = io("ws://c829-128-210-107-129.ngrok.io");
 const log = console.log;
 const API_URL = "https://c829-128-210-107-129.ngrok.io"
+
 async function Index() {
   document.getElementById("konva-holder").style.display = "block";
   document.getElementById("signup").style.display = "none";
@@ -51,6 +53,7 @@ let garden = new Garden(20,20,50);
 
 async function init() {
 
+  socket.on(window.gameID + "/update_tile", update);
   const res = await fetch(API_URL + "/get_tiles?game_id="+window.gameID);
   const data = await res.json();
   
@@ -119,6 +122,6 @@ async function init() {
   layer.draw();
 }
 
-function update() {
+function update(tile) {
   
 }
