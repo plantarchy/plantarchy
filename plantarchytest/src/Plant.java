@@ -20,7 +20,7 @@ public class Plant {
                 state = 2;
             }
         } else if (state == 2) {
-            if (rand.nextInt(5) > 3) {
+            if (rand.nextInt(20) == 19) {
                 state = 3;
             }
         }
