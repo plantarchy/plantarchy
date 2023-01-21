@@ -6,8 +6,8 @@ import java.awt.event.MouseEvent;
 public class GUI extends JFrame {
 
     Garden garden;
-    public final int GARDEN_X = 100;
-    public final int GARDEN_Y = 100;
+    public final int GARDEN_X = 50;
+    public final int GARDEN_Y = 50;
 
     public GUI(Garden garden) {
         this.garden = garden;
@@ -27,7 +27,7 @@ public class GUI extends JFrame {
 
     private void initUI() {
         setTitle("Plantarchy");
-        setSize(1000 + GARDEN_X, 1000 + GARDEN_Y);
+        setSize(1000 + 2 * GARDEN_X, 1000 + 2 * GARDEN_Y);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.repaint();
@@ -42,13 +42,16 @@ public class GUI extends JFrame {
                 if (garden.getPlant(i, j) == null) {
                     g.setColor(Color.LIGHT_GRAY);
                 } else {
-                    g.setColor(new Color(i * (255 / garden.grid.length), j * (255 / garden.grid[0].length), 100));
+                    switch (garden.getPlant(i, j).state) {
+                        case 1 -> g.setColor(new Color(10, 240, 100));
+                        case 2 -> g.setColor(new Color(50, 180, 100));
+                        case 3 -> g.setColor(new Color(240, 10, 100));
+                    }
+                    //g.setColor(new Color(i * (255 / garden.grid.length), j * (255 / garden.grid[0].length), 100));
                 }
 
                 g.fillRect(+GARDEN_X + i * garden.cellSize, +GARDEN_Y + j * garden.cellSize, garden.cellSize, garden.cellSize);
             }
         }
     }
-
-
 }

@@ -8,6 +8,17 @@ public class Garden {
         this.cellSize = cellSize;
     }
 
+    public void update() {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] != null) {
+                    grid[i][j].update();
+                }
+
+            }
+        }
+    }
+
     public Plant getPlant(int x, int y) {
         return grid[x][y];
     }
@@ -20,6 +31,10 @@ public class Garden {
         int cellX = x / cellSize;
         int cellY = y / cellSize;
 
-        plantSeed(cellX, cellY);
+        if (grid[cellX][cellY] == null) {
+            plantSeed(cellX, cellY);
+        } else if (grid[cellX][cellY].state == 3) {
+            grid[cellX][cellY].state = 2;
+        }
     }
 }

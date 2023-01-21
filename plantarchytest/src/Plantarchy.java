@@ -9,11 +9,9 @@ public class Plantarchy {
             gui.setVisible(true);
         });
 
-        garden.plantSeed(0, 0);
-        garden.plantSeed(10, 10);
-
         while (true) {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
+            garden.update();
             gui.repaint();
         }
     }

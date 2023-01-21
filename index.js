@@ -1,4 +1,4 @@
-const socket = io("ws://c829-128-210-107-129.ngrok.io");
+const socket = io("wss://c829-128-210-107-129.ngrok.io");
 const log = console.log;
 const API_URL = "https://c829-128-210-107-129.ngrok.io"
 
@@ -49,6 +49,7 @@ const GARDEN_X = 50;
 const GARDEN_Y = 50;
 
 let garden = new Garden(20,20,50);
+window.garden = garden;
 // double for to create every grid in the window
 
 async function init() {
@@ -81,6 +82,11 @@ async function init() {
         stroke: 'black',
         strokeWidth: 2
       });
+      if (garden.grid[w][h] == null) {
+        garden.grid[w][h] = new Plant(0, cell);
+      } else {
+        garden.grid[w][h].cell = cell;
+      }
 
       // mouse listeners
       // this.x() / gridSize lets Vincent's DB take it as (1, 0) (17, 11)
@@ -89,7 +95,6 @@ async function init() {
         cellY = (this.y() - GARDEN_Y) / garden.cellSize
         console.log("mouse down", cellX, cellY);
 
-        garden.grid[cellX][cellY] = new Plant(1);
 
         const res = await fetch(API_URL + "/set_tile", {
           method: "POST",
@@ -123,5 +128,13 @@ async function init() {
 }
 
 function update(tile) {
+  console.log("TILE", tile, garden.grid)
+  if (tile.crop === 0) {
+    garden.grid[tile.x_coord][tile.y_coord].cell.setAttr("fill", "#79e7a4");
+  } else {
+    console.log("UNFILL")
+    garden.grid[tile.x_coord][tile.y_coord].cell.setAttr("fill", "#ffffff");
+    garden.grid[tile.x_coord][tile.y_coord].cell.draw();
+  }
   
 }
