@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <title>Plantarchy</title>
 
   <script src="https://unpkg.com/konva@8.4.2/konva.min.js"></script>
@@ -35,8 +34,32 @@
 <body>
 <div id="konva-holder"></div>
   <div class="main" id="signup">
-    <p class="sign" align="center">Plantarchy</p>
-    
+    <p class="title" align="center">Plantarchy</p>
+
+    <img id="image" class="jk animated" src="./yellowDuck.png">
+
+    <script>
+      document.getElementById("image").addEventListener("mouseover", function() {
+        document.getElementById("image").classList.add("bounce");
+        var millisecondsToWait = 300;
+        setTimeout(function() {
+          document.getElementById("image").src="./greenDuck.png";
+          document.getElementById("image").classList.remove("bounce");
+
+        }, millisecondsToWait);
+
+      });
+      document.getElementById("image").addEventListener("mouseout", function() {
+        document.getElementById("image").classList.add("bounce");
+        var millisecondsToWait = 300;
+        setTimeout(function() {
+          document.getElementById("image").src="./yellowDuck.png";
+          document.getElementById("image").classList.remove("bounce");
+
+        }, millisecondsToWait);
+
+      });
+    </script>  
     <div class="form1">
       <!--
         <section>

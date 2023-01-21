@@ -30,12 +30,13 @@ async function Index() {
     console.log(data);
     window.playerID = data.player;
 }
+
+
 const stage = new Konva.Stage({
   height: window.innerHeight,
   width: window.innerWidth,
   container: "konva-holder",
 });
-
 
 const layer = new Konva.Layer();
 stage.add(layer);
@@ -53,7 +54,7 @@ for(let w = 0; w < garden.width; w++) {
       fill: "#79e7a4",
       height: garden.cellSize,
       width: garden.cellSize,
-      stroke: 'black',
+      stroke: 'gray',
       strokeWidth: 2
     });
     layer.add(cell)
