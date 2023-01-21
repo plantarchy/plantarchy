@@ -20,6 +20,26 @@ body {
     font-size: 23px;
 }
 
+.jk {
+    width: 20%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 77 px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
 .gc {
     width: 76%;
     color: rgb(38, 50, 56);
@@ -68,6 +88,8 @@ form.form1 {
     
 }
 
+
+
 .submit {
   cursor: pointer;
     border-radius: 5em;
@@ -97,3 +119,31 @@ a {
         border-radius: 0px;
     }
 }
+
+/*
+section {
+    position: relative;
+  }
+  
+  section img {
+    position: absolute;
+    width: 200px;
+  }
+  
+  .top {
+    animation-name: mymove;
+    animation-iteration-count: infinite;
+    animation-duration: 0.2s;
+    animation-direction: alternate;
+  }
+  
+  @keyframes mymove {
+    0% {
+      opacity: 1;
+    }
+    
+    100% {
+      opacity: 0;
+    }
+  }
+  */

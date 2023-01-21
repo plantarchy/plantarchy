@@ -36,6 +36,7 @@ const stage = new Konva.Stage({
   container: "konva-holder",
 });
 
+
 const layer = new Konva.Layer();
 stage.add(layer);
 
