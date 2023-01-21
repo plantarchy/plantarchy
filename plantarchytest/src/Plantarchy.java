@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Plantarchy {
     public static void main(String[] args) throws InterruptedException {
-        Garden garden = new Garden(20, 20, 50);
+        Garden garden = new Garden(100, 100, 10);
         GUI gui = new GUI(garden);
 
         EventQueue.invokeLater(() -> {
@@ -10,8 +10,8 @@ public class Plantarchy {
         });
 
         while (true) {
-            Thread.sleep(5000);
-            garden.update();
+            Thread.sleep(3000);
+            garden.evolve();
             gui.repaint();
         }
     }
