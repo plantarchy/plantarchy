@@ -4,6 +4,7 @@ public class Garden {
     public int width;
     public int height;
     public int cellSize;
+    public Plantarchy pl;
 
     public Garden(int width, int height, int cellSize) {
         this.width = width;
@@ -35,9 +36,10 @@ public class Garden {
         int cellX = x / cellSize;
         int cellY = y / cellSize;
 
-        if (grid[cellX][cellY].state < 2) {
+        if (grid[cellX][cellY].state < 2 && Plantarchy.seeds > 0) {
             grid[cellX][cellY].state = 2;
             triggerNeighbors(cellX, cellY);
+            Plantarchy.seeds--;
         } else if (grid[cellX][cellY].state == 4) {
             grid[cellX][cellY].state = 3;
         }
@@ -66,5 +68,31 @@ public class Garden {
                 if (grid[cellX + 1][cellY + 1].state == 0) {grid[cellX + 1][cellY + 1].state = 1;}
             }
         }
+    }
+
+    public boolean checkForNeighbors(int cellX, int cellY) {
+
+        return (
+                (cellX > 0 && grid[cellX - 1][cellY].state > 1) ||
+                (cellX > 0 && cellY < height - 1 && grid[cellX - 1][cellY + 1].state > 1) ||
+                (cellX > 0 && cellY > 0 && grid[cellX - 1][cellY - 1].state > 1) ||
+                (cellX < width - 1 && grid[cellX + 1][cellY].state > 1) ||
+                (cellX < width - 1 && cellY < height - 1 && grid[cellX + 1][cellY + 1].state > 1) ||
+                (cellX < width - 1 && cellY > 0 && grid[cellX + 1][cellY - 1].state > 1) ||
+                (cellY < height - 1 && grid[cellX][cellY + 1].state > 1) ||
+                (cellY > 0 && grid[cellX][cellY - 1].state > 1));
+    }
+
+    public int countNeighbors(int cellX, int cellY) {
+
+        return (
+                ((cellX > 0 && grid[cellX - 1][cellY].state > 1) ? 1 : 0 ) +
+                ((cellX > 0 && cellY < height - 1 && grid[cellX - 1][cellY + 1].state > 1) ? 1 : 0) +
+                ((cellX > 0 && cellY > 0 && grid[cellX - 1][cellY - 1].state > 1) ? 1 : 0) +
+                ((cellX < width - 1 && grid[cellX + 1][cellY].state > 1) ? 1 : 0) +
+                ((cellX < width - 1 && cellY < height - 1 && grid[cellX + 1][cellY + 1].state > 1) ? 1 : 0) +
+                ((cellX < width - 1 && cellY > 0 && grid[cellX + 1][cellY - 1].state > 1) ? 1 : 0) +
+                ((cellY < height - 1 && grid[cellX][cellY + 1].state > 1) ? 1 : 0) +
+                ((cellY > 0 && grid[cellX][cellY - 1].state > 1) ? 1 : 0));
     }
 }

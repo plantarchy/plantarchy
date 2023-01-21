@@ -23,20 +23,51 @@ public class Cell {
     public void evolve() {
         if (state > 1) {
             age++;
+            int deathBound = 80/(Math.abs(garden.countNeighbors(cellX, cellY) - 4) + 1);
+            boolean die = false;
+            if (age < deathBound - 1) {
+                die = rand.nextInt(deathBound - age) == 0;
+            } else {
+                die = true;
+            }
+            if (die) {
+                if (garden.checkForNeighbors(cellX, cellY)) {
+                    state = 1;
+                } else {
+                    state = 0;
+                }
+            }
+
             if (state == 2) {
-                if (rand.nextInt(10 - age) == 0) { //a plant takes at most 10 turns to mature
+                if (age < 9) {
+                    if (rand.nextInt(10 - age) == 0) { //a plant takes at most 10 turns to mature
+                        state = 3;
+                    }
+                } else {
                     state = 3;
                 }
-            } else if (state == 3) {
-                if (rand.nextInt(20) == 19) {
+
+            } else if (state == 3) { //growing fruit
+                if (rand.nextInt(20) == 0) {
                     state = 4;
+                }
+            } else if (state == 4) { //rotting
+                if (rand.nextInt(10 ) == 0) {
+                    state = 3;
                 }
             }
         } else if (state == 1) {
-            if (rand.nextInt(30) == 0) {
-                state = 2;
-                garden.triggerNeighbors(cellX, cellY);
+            age = 0;
+            if (garden.checkForNeighbors(cellX, cellY)) {
+                if (rand.nextInt(30) == 0) {
+                    state = 2;
+                    garden.triggerNeighbors(cellX, cellY);
+                }
+            } else {
+                state = 0;
             }
+        } else if (state == 0) {
+            age = 0;
         }
     }
 }
