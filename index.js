@@ -57,7 +57,7 @@ async function init() {
   socket.on(window.gameID + "/update_tile", update);
   const res = await fetch(API_URL + "/get_tiles?game_id="+window.gameID);
   const data = await res.json();
-  
+
   for (let i = 0; i < data.length; i++) {
     if (data[i].crop != 0) {
       garden.grid[data[i].x_coord][data[i].y_coord] = new Plant(data[i].crop);
@@ -67,16 +67,10 @@ async function init() {
   for (let w = 0; w < garden.width; w++) {
     for (let h = 0; h < garden.height; h++) {
 
-      if (garden.grid[w][h] != null) {
-        fill = garden.grid[w][h].color;
-      } else {
-        fill = "#79e7a4";
-      }
-
       const cell = new Konva.Rect({
         x: GARDEN_X + w * garden.cellSize,
         y: GARDEN_Y + h * garden.cellSize,
-        fill: fill,
+        fill: "#ffffff",
         height: garden.cellSize,
         width: garden.cellSize,
         stroke: 'black',
@@ -84,8 +78,10 @@ async function init() {
       });
       if (garden.grid[w][h] == null) {
         garden.grid[w][h] = new Plant(0, cell);
+        garden.grid[w][h].setCrop(garden.grid[w][h].crop);
       } else {
         garden.grid[w][h].cell = cell;
+        garden.grid[w][h].setCrop(garden.grid[w][h].crop);
       }
 
       // mouse listeners
@@ -128,12 +124,5 @@ async function init() {
 
 function update(tile) {
   console.log("TILE", tile, garden.grid)
-  if (tile.crop === 0) {
-    garden.grid[tile.x_coord][tile.y_coord].cell.setAttr("fill", "#79e7a4");
-  } else {
-    console.log("UNFILL")
-    garden.grid[tile.x_coord][tile.y_coord].cell.setAttr("fill", "#ffffff");
-    garden.grid[tile.x_coord][tile.y_coord].cell.draw();
-  }
-  
+  garden.grid[tile.x_coord][tile.y_coord].setCrop(tile.crop);
 }
