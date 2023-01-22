@@ -8,7 +8,11 @@ const API_URL = "https://c829-128-210-107-129.ngrok.io"
 async function Index() {
   document.getElementById("konva-holder").style.display = "block";
   document.getElementById("signup").style.display = "none";
+  
+  //document.getElementById("body").style.backgroundColor = "#774820"#79e7a4 green
   //document.getElementById("body").style.backgroundColor = "#774820" brown
+  document.getElementById("body").style.backgroundColor = "#b58256" // light brown
+
   document.getElementById("body").style.backgroundColor = "#79e7a4" 
   document.getElementById("berrypic").style.display = "block";
   document.getElementById("seedpic").style.display = "block";
