@@ -20,7 +20,7 @@ async function Index() {
   document.getElementById("fertilize").style.display = "block";
   document.getElementById("harvest").style.display = "block";
   document.getElementById("berrybomb").style.display = "block";
-
+  document.getElementById("leaderboard").style.display = "block";
 
   const game_code = document.getElementById("game-code").value
   const username = document.getElementById("name-input").value;
@@ -60,6 +60,7 @@ async function Index() {
     }, millisecondsToWait);
 }
   if (res.status === 404) {
+    window.location.replace("/plantarchy.html");
     alert("Error 404");
   }
   const data = await res.json();
@@ -92,9 +93,7 @@ const GARDEN_X = 0;
 const GARDEN_Y = 0;
 
 // GRID GROUP
-const gridGroup = new Konva.Group({
-  draggable: true,
-});
+const gridGroup = new Konva.Group();
 layer.add(gridGroup);
 
 
@@ -218,7 +217,7 @@ async function init() {
             })
           });
           if (res.status === 404) {
-            alert("Error 404: User or tile not found"); //HANDLE
+            window.location.replace("/plantarchy.html");
           }
           const data = await res.json();
           // console.log(data);
