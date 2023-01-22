@@ -7,6 +7,8 @@ const log = console.log;
 const API_URL = "https://c829-128-210-107-129.ngrok.io"
 
 let bombMode = false;
+let berries = 0;
+let seeds = 5;
 let harvest_cooldown = HARVEST_COOLDOWN;
 
 async function Index() {
@@ -205,7 +207,6 @@ async function init() {
 
             }, millisecondsToWait);
           }
-
           document.getElementById('crosshair').style.visibility = "hidden";
           bombMode = false;
         } else {
@@ -305,14 +306,21 @@ async function myCallback() {
     seedText.setText("x0");
   } else {
     seedText.setText("x" + data.seeds);
+    seeds = data.seeds;
   }
   if (data.berries == undefined) {
     berryText.setText("x0");
   } else {
     berryText.setText("x" + data.berries);
+    berries = data.berries;
   }
 
   harvest_cooldown = data.harvest_cooldown;
+  if (harvest_cooldown == 0) {
+    document.getElementById("harvest").style.backgroundColor = "#fad400";
+  } else {
+    document.getElementById("harvest").style.backgroundColor = "#6e5d00";
+  }
 
   username = data.player_name || "You";
   land = data.land || 0;
@@ -436,8 +444,9 @@ async function fertilize() {
 
 
 async function berrybomb() {
-  bombMode = true;
-  document.getElementById("crosshair").style.display = "block";
-  document.getElementById("crosshair").style.visibility = "visible";
-
+  if (berries >= 15) {
+    bombMode = true;
+    document.getElementById("crosshair").style.display = "block";
+    document.getElementById("crosshair").style.visibility = "visible";
+  }
 }
