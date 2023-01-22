@@ -189,7 +189,7 @@ function update(tile) {
   // console.log("Got update!", tile.x_coord, tile.y_coord)
 }
 
-const textlayer = new Konva.Layer();
+var textlayer = new Konva.Layer();
 
 // BERRY TEXT
 const berryText = new Konva.Text({
@@ -214,53 +214,21 @@ textlayer.add(seedText);
 
 
 
+var berryObj = new Image();
+berryObj.onload = function() {
+  var berryPic = new Konva.Image({
+    x: 0,
+    y: 0,
+    image: berryObj,
+    width: 100,
+    height: 100
+  });
+  textlayer.add(berryObj);
+
+};
+berryObj.src = 'berry.png'
+
 
 stage.add(textlayer);
 
 textlayer.draw();
-
-
-
-// Allows user to zoom in and out
-const maxScale = 5;
-const minScale = 0.5;
-
-var scaleBy = 1.05;
-      stage.on('wheel', (e) => {
-        // stop default scrolling
-        e.evt.preventDefault();
-
-        var oldScale = stage.scaleX();
-        var pointer = stage.getPointerPosition();
-
-        var mousePointTo = {
-          x: (pointer.x - gridGroup.x()) / oldScale,
-          y: (pointer.y - gridGroup.y()) / oldScale,
-        };
-
-        // how to scale? Zoom in? Or zoom out?
-        let direction = e.evt.deltaY > 0 ? 1 : -1;
-
-        // when we zoom on trackpad, e.evt.ctrlKey is true
-        // in that case lets revert direction
-        if (e.evt.ctrlKey) {
-          direction = -direction;
-        }
-
-        var newScale = direction > 0 ? oldScale * scaleBy : oldScale / scaleBy;
-
-        newScale = Math.max(Math.min(newScale, maxScale), minScale);
-
-        stage.scale({ x: newScale, y: newScale });
-
-        var newX = text.x() * newScale/oldScale;
-        var newY = text.y() * newScale/oldScale;
-        text.x(newX);
-        text.y(newY);
-
-        var newPos = {
-          x: pointer.x - mousePointTo.x * newScale,
-          y: pointer.y - mousePointTo.y * newScale,
-        };
-        gridGroup.position(newPos);
-      });
