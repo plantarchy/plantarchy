@@ -54,22 +54,6 @@ async function Index() {
   if (res.status === 400) {
     alert("Error 400");
   }
-  if (res.status === 418) { //  seed pic shake
-        document.getElementById("seedpic").classList.add("shake");
-        var millisecondsToWait = 300;
-        setTimeout(function() {
-          document.getElementById("seedpic").classList.remove("shake");
-
-        }, millisecondsToWait);
-  }
-  if (res.status === 403) { // berry pic shake
-    document.getElementById("berrypic").classList.add("shake");
-    var millisecondsToWait = 300;
-    setTimeout(function() {
-      document.getElementById("berrypic").classList.remove("shake");
-
-    }, millisecondsToWait);
-}
   if (res.status === 404) {
     window.location.replace("/plantarchy.html");
   }
@@ -254,6 +238,14 @@ async function init() {
                 crop: 2
               })
             });
+            if (res.status === 418) {
+              document.getElementById("seedpic").classList.add("shake-trigger");
+              var millisecondsToWait = 600;
+              setTimeout(function() {
+                document.getElementById("seedpic").classList.remove("shake-trigger");
+          
+              }, millisecondsToWait);
+            }
             if (res.status === 404) {
               window.location.replace("/plantarchy.html");
             }
@@ -363,6 +355,7 @@ setInterval(() => {
   })
 }, 500)
 
+// EXTRACT
 async function extract() {
   const res = await fetch(API_URL + "/extract", {
     method: "POST",
@@ -377,39 +370,17 @@ async function extract() {
   });
   const data = await res.json();
 
-  if (res === 403) {
-    document.getElementById("berrypic").classList.add("shake");
-    var millisecondsToWait = 300;
+  if (res.status === 403) {
+    console.log(res.status);
+    document.getElementById("berrypic").classList.add("shake-trigger");
+    var millisecondsToWait = 600;
     setTimeout(function() {
-      document.getElementById("berrypic").classList.remove("shake");
+      document.getElementById("berrypic").classList.remove("shake-trigger");
 
     }, millisecondsToWait);
   }
 }
-async function fertilize() {
-  const res = await fetch(API_URL + "/fertilize", {
-    method: "POST",
-    headers: {
-      'Accept': 'application/json',
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      player_uuid: window.playerID,
-      game_uuid: window.gameID,
-    })
-  });
-  const data = await res.json();
-
-  if (res === 403) {
-    document.getElementById("berrypic").classList.add("shake");
-    var millisecondsToWait = 300;
-    setTimeout(function() {
-      document.getElementById("berrypic").classList.remove("shake");
-
-    }, millisecondsToWait);
-  }
-}
-
+//  HARVEST
 async function harvest() {
   if (harvest_cooldown == 0) {
     const res = await fetch(API_URL + "/harvest", {
@@ -425,15 +396,45 @@ async function harvest() {
     });
     const data = await res.json();
   
-    if (res === 403) {
-      document.getElementById("berrypic").classList.add("shake");
-      var millisecondsToWait = 300;
+    if (res.status === 403) {
+      console.log(res.status);
+      document.getElementById("berrypic").classList.add("shake-trigger");
+      var millisecondsToWait = 600;
       setTimeout(function() {
-        document.getElementById("berrypic").classList.remove("shake");
+        document.getElementById("berrypic").classList.remove("shake-trigger");
+  
       }, millisecondsToWait);
     }
   }
 }
+// FERTILIZE
+async function fertilize() {
+  const res = await fetch(API_URL + "/fertilize", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      player_uuid: window.playerID,
+      game_uuid: window.gameID,
+    })
+  });
+  const data = await res.json();
+
+  console.log(res.status);
+  if (res.status === 403) {
+    console.log(res.status);
+    document.getElementById("berrypic").classList.add("shake-trigger");
+    var millisecondsToWait = 0;
+    setTimeout(function() {
+      document.getElementById("berrypic").classList.remove("shake-trigger");
+
+    }, millisecondsToWait);
+  }
+}
+
+
 async function berrybomb() {
   bombMode = true;
   document.getElementById("crosshair").style.display = "block";
