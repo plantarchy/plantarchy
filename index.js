@@ -231,7 +231,7 @@ function handleNewPlayer(player) {
   let index = Math.floor(Math.random() * OTHERS.length);
   let colors = OTHERS[index];
   HUE_MAPPING[player.id] = colors;
-  OTHERS.splice(index);
+  OTHERS.splice(index, 1);
   window.HUE_MAPPING = HUE_MAPPING;
 }
 
