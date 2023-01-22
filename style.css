@@ -51,7 +51,12 @@
 }
 
 .row:nth-child(1) {
-  visibility: hidden;
+  padding-top: 10px;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+  padding-left: 32%;
+  color: #3ddf4a;
 }
 
 .row:nth-child(2) {
@@ -234,16 +239,6 @@ a {
     }
 }
 
-.crosshair {
-  pointer-events: none;
-  position:absolute;
-  transform:translate(-50%,-50%);
-  height:100px;
-  width:100px;
-  border-radius:100%;
-  border:4px solid rgb(255, 0, 0);
-}
-
 .berry {
   width: 10px;
   height: 10px;
@@ -263,19 +258,9 @@ a {
   font-family: 'Ubuntu', sans-serif;
 }
 
-.harvest {
-  position: absolute;
-  top: 50%;
-  left: 25px;
-  width: 330px;
-  height: 70px;
-  border-radius: 1.5em;
-  background-color: #fad400;
-}
-
 .extract {
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 25px;
   width: 330px;
   height: 70px;
@@ -283,22 +268,32 @@ a {
   background-color: #41ebf7e1;
 }
 
-.berrybomb {
+.harvest {
+  position: absolute;
+  top: 60%;
+  left: 25px;
+  width: 330px;
+  height: 70px;
+  border-radius: 1.5em;
+  background-color: #fad400;
+}
+
+.fertilize {
   position: absolute;
   top: 70%;
   left: 25px;
   width: 330px;
   height: 70px;
   border-radius: 1.5em;
-  background-color: #fa0068;
+  background-color: #25a805;
 }
 
-.fertilize {
+.berrybomb {
   position: absolute;
   top: 80%;
   left: 25px;
   width: 330px;
   height: 70px;
   border-radius: 1.5em;
-  background-color: #25a805;
+  background-color: #fa0068;
 }
