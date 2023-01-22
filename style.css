@@ -37,6 +37,8 @@
 }
 
 .lsb {
+  animation-name: "shake";
+  animation-duration: 2s;
   width: 150px;
   height: 150px;
   position: absolute;

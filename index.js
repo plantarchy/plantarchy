@@ -38,7 +38,7 @@ async function Index() {
   if (res.status === 400) {
     alert("Error 400");
   }
-  if (res.status === 403) {
+  if (res.status === 418) { //  seed pic shake
         document.getElementById("seedpic").classList.add("shake");
         var millisecondsToWait = 300;
         setTimeout(function() {
@@ -46,6 +46,14 @@ async function Index() {
 
         }, millisecondsToWait);
   }
+  if (res.status === 403) { // berry pic shake
+    document.getElementById("berrypic").classList.add("shake");
+    var millisecondsToWait = 300;
+    setTimeout(function() {
+      document.getElementById("berrypic").classList.remove("shake");
+
+    }, millisecondsToWait);
+}
   if (res.status === 404) {
     alert("Error 404");
   }
