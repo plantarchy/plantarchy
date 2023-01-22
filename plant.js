@@ -29,28 +29,28 @@ class Plant {
                 if (this.owner == window.playerID) {
                     this.color = YOU[0];
                 } else {
-                    this.color = HUE_MAPPING[this.owner][0];
+                    this.color = HUE_MAPPING[this.owner]?.[0] || "#512b0a";
                 }
                 break;
             case 2:
                 if (this.owner == window.playerID) {
                     this.color = YOU[1];
                 } else {
-                    this.color = HUE_MAPPING[this.owner][1];
+                    this.color = HUE_MAPPING[this.owner]?.[1] || "#512b0a";
                 }
                 break;
             case 3:
                 if (this.owner == window.playerID) {
                     this.color = YOU[2];
                 } else {
-                    this.color = HUE_MAPPING[this.owner][2];
+                    this.color = HUE_MAPPING[this.owner]?.[2] || "#512b0a";
                 }
                 break;
             case 4:
                 if (this.owner == window.playerID) {
                     this.color = YOU[3];
                 } else {
-                    this.color = HUE_MAPPING[this.owner][3];
+                    this.color = HUE_MAPPING[this.owner]?.[3] || "#512b0a";
                 }
                 break;
         }
