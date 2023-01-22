@@ -37,11 +37,6 @@ async function Index() {
   window.gameID = data.game_id;
   window.playerID = data.player;
 
-  let hue = COLOR_HUES[0];
-  HUE_MAPPING[window.playerID] = hue;
-  COLOR_HUES.splice(0, 1);
-  window.HUE_MAPPING = HUE_MAPPING;
-
   await init();
 }
 
@@ -76,8 +71,16 @@ async function init() {
   socket.on(window.gameID + "/update_tile", update);
   socket.on("new_player", handleNewPlayer);
   socket.on("disconnect_player", handleLeavePlayer);
-  const res = await fetch(API_URL + "/get_tiles?game_id="+window.gameID);
-  const data = await res.json();
+
+  // Fetch all players
+  let res = await fetch(API_URL + "/get_users?game_id="+window.gameID);
+  let data = await res.json();
+  for (let player of data) {
+    handleNewPlayer(player);
+  }
+
+  res = await fetch(API_URL + "/get_tiles?game_id="+window.gameID);
+  data = await res.json();
 
   for (let i = 0; i < data.length; i++) {
     if (data[i].crop != 0) {
@@ -152,7 +155,7 @@ async function init() {
             alert("No seeds");
           }
           const data = await res.json();
-          console.log(data);
+          // console.log(data);
         }
       });
       layer.add(gridGroup)
@@ -165,20 +168,19 @@ function handleNewPlayer(player) {
   console.log("New Player", player)
 
   let id = player.playerID;
-
-  /*let hue = COLOR_HUES[Math.floor(Math.random * COLOR_HUES.length)];
-  HUE_MAPPING[player.id] = hue;
-  COLOR_HUES.splice(COLOR_HUES.findIndex(hue), 1);
-  window.HUE_MAPPING = HUE_MAPPING;*/
+  let index = Math.floor(Math.random() * OTHERS.length);
+  let colors = OTHERS[index];
+  HUE_MAPPING[player.id] = colors;
+  OTHERS.splice(index);
+  window.HUE_MAPPING = HUE_MAPPING;
 }
 
 function handleLeavePlayer(player) {
-
-  let id = player.playerID;
+  let id = player.id;
 
   let hue = HUE_MAPPING[player.id];
   delete HUE_MAPPING[player.id];
-  COLOR_HUES.push(hue);
+  OTHERS.push(hue);
 }
 
 function update(tile) {
