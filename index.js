@@ -191,9 +191,6 @@ async function init() {
           if (res.status === 404) {
             alert("Error 404: User or tile not found"); //HANDLE
           }
-          if (res.status === 418) {
-            alert("No seeds");
-          }
           const data = await res.json();
           // console.log(data);
         }
@@ -230,4 +227,29 @@ function update(tile) {
   garden.grid[tile.x_coord][tile.y_coord].setCrop(tile.crop);
   garden.grid[tile.x_coord][tile.y_coord].cell.draw();
   // console.log("Got update!", tile.x_coord, tile.y_coord)
+}
+
+const intervalID = setInterval(myCallback, 100)
+
+async function myCallback() {
+  const res = await fetch(API_URL + "/get_user?player_id=" + window.playerID, {
+    method: "GET",
+    headers: {
+      'Accept': 'application/json',
+      'Content-type': 'application/json'
+    },
+  });
+  const data = await res.json();
+
+  if (data.seeds == undefined) {
+    seedText.setText("x0");
+  } else {
+    seedText.setText("x" + data.seeds);
+  }
+  if (data.berries == undefined) {
+    berryText.setText("x0");
+  } else {
+    berryText.setText("x" + data.berries);
+  }
+  textlayer.draw();  
 }
