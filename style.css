@@ -27,7 +27,7 @@ body {
     width: 125px;
     height: 110px;
     padding: 10px 20px;
-    margin-left: 125px;
+    margin-left: 122px;
     text-align: center;
     margin-bottom: 15 px;
     font-family: 'Ubuntu', sans-serif;
@@ -168,6 +168,25 @@ a {
     .main {
         border-radius: 0px;
     }
+}
+
+.berry {
+  width: 10px;
+  height: 10px;
+  padding: 10px 20px;
+  margin-left: 122px;
+  text-align: center;
+  margin-bottom: 15 px;
+  font-family: 'Ubuntu', sans-serif;
+}
+.seed {
+  width: 10px;
+  height: 10px;
+  padding: 10px 20px;
+  margin-left: 122px;
+  text-align: center;
+  margin-bottom: 15 px;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 /*
