@@ -53,7 +53,7 @@ class Plant {
                 }
                 break;
         }
-        console.log("COLOR", this.color)
+        // console.log("COLOR", this.color)
         this.cell.setAttr("fill", this.color);
         this.crop = crop;
     }

@@ -166,6 +166,7 @@ async function init() {
 
 function handleNewPlayer(player) {
   console.log("New Player", player)
+  if (player.id == window.playerID) return;
 
   let id = player.playerID;
   let index = Math.floor(Math.random() * OTHERS.length);
