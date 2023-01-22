@@ -36,19 +36,27 @@ async function Index() {
   await init();
 }
 
+// STAGE
 const stage = new Konva.Stage({
   height: window.innerHeight,
   width: window.innerWidth,
   container: "konva-holder",
-  draggable: true,
 });
 
 
+// LAYER
 const layer = new Konva.Layer();
 stage.add(layer);
+// const for the grid
+const GARDEN_X = 50;
+const GARDEN_Y = 50;
 
-const GARDEN_X = 100;
-const GARDEN_Y = 100;
+// GRID GROUP
+const gridGroup = new Konva.Group({
+  draggable: true,
+});
+layer.add(gridGroup);
+
 
 let garden = new Garden(35,35,25);
 window.garden = garden;
@@ -77,7 +85,11 @@ async function init() {
         width: garden.cellSize,
         stroke: 'black',
         strokeWidth: 2
+
       });
+
+      gridGroup.add(cell);
+
       if (garden.grid[w][h] == null) {
         garden.grid[w][h] = new Plant("", 0, cell);
         garden.grid[w][h].cell = cell;
@@ -132,11 +144,12 @@ async function init() {
           console.log(data);
         }
       });
-      layer.add(cell)
+      layer.add(gridGroup)
     }
   }
   layer.draw();
 }
+
 
 function update(tile) {
   // console.log("TILE", tile, garden.grid)
@@ -146,12 +159,73 @@ function update(tile) {
   // console.log("Got update!", tile.x_coord, tile.y_coord)
 }
 
+const textlayer = new Konva.Layer();
 
+// BERRY TEXT
+const berryText = new Konva.Text({
+  x: 20,
+  y: 20,
+  fontSize: 15,
+  text: "Berry count: ",
+});
+textlayer.add(berryText);
+
+textlayer.visible(true);
+layer.visible(true);
+
+// SEED TEXT
+const seedText = new Konva.Text({
+  x: window.innerWidth - 175,
+  y: 20,
+  fontSize: 15,
+  text: "Available seeds: ",
+});
+textlayer.add(seedText);
+
+
+
+// BERRY IMAGE
+const berryObj = new Image();
+berryObj.onload = function() {
+  const berry = new Konva.Image({
+    x: 20,
+    y: 50,
+    image: berryObj,
+    width: 100,
+    height: 100
+  });
+};
+berryObj.src = './berry.png'
+
+textlayer.add(berryObj);
+
+// SEED IMAGE
+const seedObj = new Image();
+seedObj.onload = function() {
+  const seed = new Konva.Image({
+    x: 200,
+    y: 50,
+    image: seedObj,
+    width: 100,
+    height: 100
+  });
+};
+seedObj.src = './seed.png'
+textlayer.add(seedObj);
+stage.add(textlayer);
+
+textlayer.draw();
+
+
+
+// Allows user to zoom in and out
 const maxScale = 5;
 const minScale = 0.5;
 
-var scaleBy = 1.01;
-      stage.on('wheel', (e) => {
+ var scaleBy = 1.05;
+
+
+stage.on('wheel', (e) => {
         // stop default scrolling
         e.evt.preventDefault();
 
@@ -159,8 +233,8 @@ var scaleBy = 1.01;
         var pointer = stage.getPointerPosition();
 
         var mousePointTo = {
-          x: (pointer.x - stage.x()) / oldScale,
-          y: (pointer.y - stage.y()) / oldScale,
+          x: (pointer.x - gridGroup.x()) / oldScale,
+          y: (pointer.y - gridGroup.y()) / oldScale,
         };
 
         // how to scale? Zoom in? Or zoom out?
@@ -178,9 +252,14 @@ var scaleBy = 1.01;
 
         stage.scale({ x: newScale, y: newScale });
 
+        var newX = text.x() * newScale/oldScale;
+        var newY = text.y() * newScale/oldScale;
+        text.x(newX);
+        text.y(newY);
+
         var newPos = {
           x: pointer.x - mousePointTo.x * newScale,
           y: pointer.y - mousePointTo.y * newScale,
         };
-        stage.position(newPos);
+        gridGroup.position(newPos);
       });
