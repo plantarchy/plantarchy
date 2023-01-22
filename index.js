@@ -1,4 +1,7 @@
 const socket = io("wss://c829-128-210-107-129.ngrok.io");
+socket.on('connect', () => {
+  window.socketID = socket.id;
+})
 const log = console.log;
 const API_URL = "https://c829-128-210-107-129.ngrok.io"
 
@@ -19,7 +22,8 @@ async function Index() {
     },
     body: JSON.stringify({
       game_code: game_code,
-      player_name: username
+      player_name: username,
+      socket_sid: window.socketID
     })
   });
   if (res.status === 400) {
@@ -32,6 +36,11 @@ async function Index() {
   console.log(data);
   window.gameID = data.game_id;
   window.playerID = data.player;
+
+  let hue = COLOR_HUES[0];
+  HUE_MAPPING[window.playerID] = hue;
+  COLOR_HUES.splice(0, 1);
+  window.HUE_MAPPING = HUE_MAPPING;
 
   await init();
 }
@@ -65,6 +74,8 @@ window.garden = garden;
 async function init() {
 
   socket.on(window.gameID + "/update_tile", update);
+  socket.on("new_player", handleNewPlayer);
+  socket.on("disconnect_player", handleLeavePlayer);
   const res = await fetch(API_URL + "/get_tiles?game_id="+window.gameID);
   const data = await res.json();
 
@@ -150,6 +161,20 @@ async function init() {
   layer.draw();
 }
 
+function handleNewPlayer(player) {
+  console.log("New Player", player
+  )
+  let hue = COLOR_HUES[Math.floor(Math.random * COLOR_HUES.length)];
+  HUE_MAPPING[player.id] = hue;
+  COLOR_HUES.splice(COLOR_HUES.findIndex(hue), 1);
+  window.HUE_MAPPING = HUE_MAPPING;
+}
+
+function handleLeavePlayer(player) {
+  let hue = HUE_MAPPING[player.id];
+  delete HUE_MAPPING[player.id];
+  COLOR_HUES.push(hue);
+}
 
 function update(tile) {
   // console.log("TILE", tile, garden.grid)
