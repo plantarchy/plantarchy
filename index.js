@@ -345,6 +345,10 @@ setInterval(async () => {
       displaySelf = false;
     };
     name.innerText = data[i].player_name;
+    console.log(HUE_MAPPING[data[i].id]?.[1])
+    name.style.color = "#FFF";
+    score.style.color = "#FFF";
+    name.parentNode.style.backgroundColor = HUE_MAPPING[data[i].id]?.[1] || YOU[1];
     score.innerText = data[i].land;
   }
 
