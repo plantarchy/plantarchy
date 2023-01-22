@@ -121,7 +121,7 @@ const berryText = new Konva.Text({
   x: 150,
   y: 110,
   fontSize: 50,
-  text: "X",
+  text: "X ",
   fontStyle: "bold",
 });
 textlayer.add(berryText);
@@ -134,7 +134,7 @@ const seedText = new Konva.Text({
   x: 150,
   y: 320,
   fontSize: 50,
-  text: "X",
+  text: "X ",
   fontStyle: "bold",
 });
 textlayer.add(seedText);
@@ -297,6 +297,9 @@ function update(tile) {
   // console.log("Got update!", tile.x_coord, tile.y_coord)
 }
 
+let land = 0;
+let username = "";
+
 async function myCallback() {
   const res = await fetch(API_URL + "/get_user?player_id=" + window.playerID, {
     method: "GET",
@@ -317,9 +320,42 @@ async function myCallback() {
   } else {
     berryText.setText("x" + data.berries);
   }
+
   harvest_cooldown = data.harvest_cooldown;
+
+  username = data.player_name || "You";
+  land = data.land || 0;
+
   textlayer.draw();  
 }
+
+setInterval(async () => {
+  if (!window.gameID) return;
+  const res = await fetch(API_URL + "/get_users?game_id=" + window.gameID, {
+    method: "GET",
+  });
+  const data = await res.json();
+  data.sort((a, b) => (b.land - a.land))
+  let displaySelf = false;
+  for (let i = 0; i < 4; i++) {
+    if (i >= data.length) break;
+    const name = document.getElementById("name" + (i+1));
+    const score = document.getElementById("score" + (i+1));
+    console.log("name" + (i+1), "score" + (i+1))
+    if (data[i].player_name === username) {
+      displaySelf = false;
+    };
+    name.innerText = data[i].player_name;
+    score.innerText = data[i].land;
+  }
+
+  if (displaySelf) {
+    const name = document.getElementById("name5");
+    const score = document.getElementById("score5");
+    name.innerText = username;
+    score.innerText = land;
+  }
+}, 1000)
 
 setInterval(() => {
   socket.emit("ping", {

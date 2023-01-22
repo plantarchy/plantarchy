@@ -90,33 +90,33 @@
       <button class="submit" onclick="Index();">Sign in!</button>
     </div>  
     </div>  
-    <button class="extract" id="extract" onclick="extract();" visibility: hidden>Extract</button>
-    <button class="fertilize" id="fertilize" onclick="fertilize();" visibility: hidden>Fertilize</button>
-    <button class="harvest" id="harvest" onclick="harvest();" visibility: hidden>Harvest</button>
-    <button class="berrybomb" id="berrybomb" onclick="berrybomb();" visibility: hidden>Berry Bomb</button>
-  
+    <button class="harvest" id="harvest" onclick="harvest();" visibility: hidden><b>Harvest</b><br>Cost: 30 tick cooldown<br>Harvest all berries!</button>
+    <button class="extract" id="extract" onclick="extract();" visibility: hidden><b>Extract</b><br>Cost: 10 Berries<br>Exchange some berries for 5 seeds!</button>
+    <button class="berrybomb" id="berrybomb" onclick="berrybomb();" visibility: hidden><b>Berry Bomb</b><br>Cost: 15 Berries<br>Annihilate all plants in a 5 x 5 grid!</button>
+    <button class="fertilize" id="fertilize" onclick="fertilize();" visibility: hidden><b>Fertilize</b><br>Cost: 30 Berries<br>Drastically increase your crops's spread rate!</button>
+
     <div class="lb" id="leaderboard" visibility: hidden>
       <div class="row">
-        <div class="name">Player0</div><div class="score"></div>
+        Leaderboard<div class="name"></div><div class="score"></div>
       </div>
       <div class="row">
-        <div class="name">Player 1</div><div class="score">430</div>
-      </div>
-    
-      <div class="row">
-        <div class="name">Player 2</div><div class="score">580</div>
+        <div id="name1" class="name">&nbsp;</div><div class="score" id="score1"></div>
       </div>
     
       <div class="row">
-        <div class="name">Player 3</div><div class="score">310</div>
+        <div id="name2" class="name">&nbsp;</div><div class="score" id="score2"></div>
       </div>
     
       <div class="row">
-        <div class="name">Player 4</div><div class="score">640</div>
+        <div id="name3" class="name">&nbsp;</div><div class="score" id="score3"></div>
       </div>
     
       <div class="row">
-        <div class="name">Player 5</div><div class="score">495</div>
+        <div id="name4" class="name">&nbsp;</div><div class="score" id="score4"></div>
+      </div>
+    
+      <div class="row">
+        <div id="name5" class="name">&nbsp;</div><div class="score" id="score5"></div>
       </div>
     </div>  
     <div class="crosshair" id="crosshair" visibility: hidden></div>
