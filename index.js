@@ -40,14 +40,18 @@ const stage = new Konva.Stage({
   height: window.innerHeight,
   width: window.innerWidth,
   container: "konva-holder",
+  draggable: true,
 });
 
 
 const layer = new Konva.Layer();
 stage.add(layer);
 
-const GARDEN_X = 50;
-const GARDEN_Y = 50;
+stage.offsetX(window.innerWidth);
+stage.offsetY(window.innerWidth);
+
+const GARDEN_X = 100;
+const GARDEN_Y = 100;
 
 let garden = new Garden(35,35,25);
 window.garden = garden;
@@ -129,6 +133,9 @@ function update(tile) {
 }
 
 
+const maxScale = 5;
+const minScale = 0.5;
+
 var scaleBy = 1.01;
       stage.on('wheel', (e) => {
         // stop default scrolling
@@ -152,6 +159,8 @@ var scaleBy = 1.01;
         }
 
         var newScale = direction > 0 ? oldScale * scaleBy : oldScale / scaleBy;
+
+        newScale = Math.max(Math.min(newScale, maxScale), minScale);
 
         stage.scale({ x: newScale, y: newScale });
 
