@@ -284,31 +284,3 @@ a {
   width: 350px;
   height: 70px;
 }
-
-/*
-section {
-    position: relative;
-  }
-  
-  section img {
-    position: absolute;
-    width: 200px;
-  }
-  
-  .top {
-    animation-name: mymove;
-    animation-iteration-count: infinite;
-    animation-duration: 0.2s;
-    animation-direction: alternate;
-  }
-  
-  @keyframes mymove {
-    0% {
-      opacity: 1;
-    }
-    
-    100% {
-      opacity: 0;
-    }
-  }
-  */
