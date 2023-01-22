@@ -54,8 +54,7 @@ const GARDEN_Y = 50;
 // GRID GROUP
 const gridGroup = new Konva.Group({
   draggable: true,
-}
-);
+});
 layer.add(gridGroup);
 
 
@@ -71,7 +70,7 @@ async function init() {
 
   for (let i = 0; i < data.length; i++) {
     if (data[i].crop != 0) {
-      garden.grid[data[i].x_coord][data[i].y_coord] = new Plant(data[i].crop);
+      garden.grid[data[i].x_coord][data[i].y_coord] = new Plant(data[i].player_uuid, data[i].crop);
     }
   }
 
@@ -92,7 +91,8 @@ async function init() {
       gridGroup.add(cell);
 
       if (garden.grid[w][h] == null) {
-        garden.grid[w][h] = new Plant(0, cell);
+        garden.grid[w][h] = new Plant("", 0, cell);
+        garden.grid[w][h].cell = cell;
         garden.grid[w][h].setCrop(garden.grid[w][h].crop);
       } else {
         garden.grid[w][h].cell = cell;
@@ -105,31 +105,44 @@ async function init() {
         cellX = (this.x() - GARDEN_X) / garden.cellSize;
         cellY = (this.y() - GARDEN_Y) / garden.cellSize
         console.log("mouse down", cellX, cellY);
-
-
-        const res = await fetch(API_URL + "/set_tile", {
-          method: "POST",
-          headers: {
-            'Accept': 'application/json',
-            'Content-type': 'application/json'
-          },
-          body: JSON.stringify({
-            x: cellX,
-            y: cellY,
-            player_uuid: window.playerID,
-            game_uuid: window.gameID,
-            crop: 1
-          })
-        });
-        if (res.status === 404) {
-          alert("Error 404: User or tile not found"); //HANDLE
+        if (garden.grid[cellX][cellY].crop == 4) {
+          const res = await fetch(API_URL + "/pick_berry", {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+              x: cellX,
+              y: cellY,
+              player_uuid: window.playerID,
+              game_uuid: window.gameID,
+            })
+          });
+        } else {
+          const res = await fetch(API_URL + "/set_tile", {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+              x: cellX,
+              y: cellY,
+              player_uuid: window.playerID,
+              game_uuid: window.gameID,
+              crop: 2
+            })
+          });
+          if (res.status === 404) {
+            alert("Error 404: User or tile not found"); //HANDLE
+          }
+          if (res.status === 418) {
+            alert("No seeds");
+          }
+          const data = await res.json();
+          console.log(data);
         }
-        if (res.status === 403) {
-          alert("Tile already occupied");
-        }
-        const data = await res.json();
-        console.log(data);
-
       });
       layer.add(gridGroup)
     }
@@ -139,8 +152,11 @@ async function init() {
 
 
 function update(tile) {
-  console.log("TILE", tile, garden.grid)
+  // console.log("TILE", tile, garden.grid)
+  garden.grid[tile.x_coord][tile.y_coord].owner = tile.player_uuid;
   garden.grid[tile.x_coord][tile.y_coord].setCrop(tile.crop);
+  garden.grid[tile.x_coord][tile.y_coord].cell.draw();
+  // console.log("Got update!", tile.x_coord, tile.y_coord)
 }
 
 const textlayer = new Konva.Layer();

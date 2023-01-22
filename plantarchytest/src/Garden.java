@@ -85,6 +85,7 @@ public class Garden {
 
     public int countNeighbors(int cellX, int cellY) {
 
+
         return (
                 ((cellX > 0 && grid[cellX - 1][cellY].state > 1) ? 1 : 0 ) +
                 ((cellX > 0 && cellY < height - 1 && grid[cellX - 1][cellY + 1].state > 1) ? 1 : 0) +

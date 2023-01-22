@@ -7,7 +7,7 @@ public class Cell {
     public int cellY;
     public int state;
 
-    public int user; //placeholder
+    public int player; //placeholder
     public int age;
     private Random rand = new Random();
 
