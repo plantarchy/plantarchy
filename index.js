@@ -259,3 +259,10 @@ async function myCallback() {
   }
   textlayer.draw();  
 }
+
+setInterval(() => {
+  socket.emit("ping", {
+    "player_id": window.playerID,
+    "game_id": window.gameID
+  })
+}, 500)
