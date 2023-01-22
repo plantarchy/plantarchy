@@ -209,34 +209,7 @@ textlayer.add(seedText);
 
 
 
-// BERRY IMAGE
-const berryObj = new Image();
-berryObj.onload = function() {
-  const berry = new Konva.Image({
-    x: 20,
-    y: 50,
-    image: berryObj,
-    width: 100,
-    height: 100
-  });
-};
-berryObj.src = './berry.png'
 
-textlayer.add(berryObj);
-
-// SEED IMAGE
-const seedObj = new Image();
-seedObj.onload = function() {
-  const seed = new Konva.Image({
-    x: 200,
-    y: 50,
-    image: seedObj,
-    width: 100,
-    height: 100
-  });
-};
-seedObj.src = './seed.png'
-textlayer.add(seedObj);
 stage.add(textlayer);
 
 textlayer.draw();
