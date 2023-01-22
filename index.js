@@ -15,7 +15,7 @@ async function Index() {
   document.getElementById("body").style.backgroundColor = "#79e7a4" 
   document.getElementById("berrypic").style.display = "block";
   document.getElementById("seedpic").style.display = "block";
-  document.getElementById("extract").style.visibility = "visible";
+  document.getElementById("extract").style.display = "block";
 
   const game_code = document.getElementById("game-code").value
   const username = document.getElementById("name-input").value;

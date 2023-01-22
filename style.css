@@ -202,6 +202,14 @@ a {
   font-family: 'Ubuntu', sans-serif;
 }
 
+.extract {
+  position: absolute;
+  top: 500px;
+  left: 30px;
+  width: 350px;
+  height: 70px;
+}
+
 /*
 section {
     position: relative;
