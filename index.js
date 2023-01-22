@@ -434,7 +434,7 @@ async function fertilize() {
   if (res.status === 403) {
     console.log(res.status);
     document.getElementById("berrypic").classList.add("shake-trigger");
-    var millisecondsToWait = 0;
+    var millisecondsToWait = 600;
     setTimeout(function() {
       document.getElementById("berrypic").classList.remove("shake-trigger");
 
@@ -448,5 +448,12 @@ async function berrybomb() {
     bombMode = true;
     document.getElementById("crosshair").style.display = "block";
     document.getElementById("crosshair").style.visibility = "visible";
+  } else {
+    document.getElementById("berrypic").classList.add("shake-trigger");
+    var millisecondsToWait = 600;
+    setTimeout(function() {
+      document.getElementById("berrypic").classList.remove("shake-trigger");
+
+    }, millisecondsToWait);
   }
 }
