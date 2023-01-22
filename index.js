@@ -11,7 +11,6 @@ async function Index() {
   
   //document.getElementById("body").style.backgroundColor = "#774820"#79e7a4 green
   //document.getElementById("body").style.backgroundColor = "#774820" brown
-  document.getElementById("body").style.backgroundColor = "#b58256" // light brown
 
   document.getElementById("body").style.backgroundColor = "#79e7a4" 
   document.getElementById("berrypic").style.display = "block";
