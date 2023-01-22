@@ -50,12 +50,12 @@
   <div class="main" id="signup">
     <p class="title" align="center">Plantarchy</p>
 
-    <img id="image" class="jk animated" src="./happyplant.png">
+    <img id="image" class="jk animated" src="./happyPlantShovel.png">
 
     <script>
       document.getElementById("image").addEventListener("mouseover", function() {
 
-        document.getElementById("image").src="./angryplant.png";
+        document.getElementById("image").src="./angryDevilPlant.png";
         document.getElementById("image").classList.add("shake");
 
         var millisecondsToWait = 300;
@@ -66,14 +66,12 @@
 
       });
       document.getElementById("image").addEventListener("mouseout", function() {
-        document.getElementById("image").src="./happyplant.png";
+        document.getElementById("image").src="./happyPlantShovel.png";
         document.getElementById("image").classList.add("shake");
 
         var millisecondsToWait = 300;
         setTimeout(function() {
           document.getElementById("image").classList.remove("shake");
-
-
         }, millisecondsToWait);
 
       });
