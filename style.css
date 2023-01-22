@@ -253,19 +253,9 @@ a {
   font-family: 'Ubuntu', sans-serif;
 }
 
-.extract {
-  position: absolute;
-  top: 50%;
-  left: 25px;
-  width: 330px;
-  height: 70px;
-  border-radius: 1.5em;
-  background-color: #41ebf7e1;
-}
-
 .harvest {
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 25px;
   width: 330px;
   height: 70px;
@@ -273,22 +263,32 @@ a {
   background-color: #fad400;
 }
 
-.fertilize {
+.extract {
+  position: absolute;
+  top: 60%;
+  left: 25px;
+  width: 330px;
+  height: 70px;
+  border-radius: 1.5em;
+  background-color: #41ebf7e1;
+}
+
+.berrybomb {
   position: absolute;
   top: 70%;
   left: 25px;
   width: 330px;
   height: 70px;
   border-radius: 1.5em;
-  background-color: #25a805;
+  background-color: #fa0068;
 }
 
-.berrybomb {
+.fertilize {
   position: absolute;
   top: 80%;
   left: 25px;
   width: 330px;
   height: 70px;
   border-radius: 1.5em;
-  background-color: #fa0068;
+  background-color: #25a805;
 }
