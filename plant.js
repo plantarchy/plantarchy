@@ -5,7 +5,7 @@ const OTHERS = [
     ["#331c0a", "#f06e0a", "#f06e0a", "#f06e0a"], // dark brown / orange
     ["#332f0a", "#f0d90a", "#f0d90a", "#f0d90a"], // yellow
     ["#240a33", "#9c0af0", "#9c0af0", "#9c0af0"], // purple
-    ["#0a3133", "#0bb3bc", "#9c0af0", "#9c0af0"], // light blue
+    ["#0a3133", "#0bb3bc", "#0bb3bc", "#0bb3bc"], // light blue
 ]
 const HUE_MAPPING = {};
 
