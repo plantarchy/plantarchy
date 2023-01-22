@@ -70,7 +70,6 @@ async function Index() {
 }
   if (res.status === 404) {
     window.location.replace("/plantarchy.html");
-    alert("Error 404");
   }
   const data = await res.json();
   console.log(data);
