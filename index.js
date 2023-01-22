@@ -150,7 +150,7 @@ function update(tile) {
 const maxScale = 5;
 const minScale = 0.5;
 
-var scaleBy = 1.01;
+var scaleBy = 1.08;
       stage.on('wheel', (e) => {
         // stop default scrolling
         e.evt.preventDefault();
