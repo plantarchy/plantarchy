@@ -79,10 +79,11 @@ var textlayer = new Konva.Layer();
 
 // BERRY TEXT
 const berryText = new Konva.Text({
-  x: 20,
-  y: 20,
-  fontSize: 15,
-  text: "Berry count: ",
+  x: 150,
+  y: 110,
+  fontSize: 50,
+  text: "X",
+  fontStyle: "bold",
 });
 textlayer.add(berryText);
 
@@ -91,28 +92,13 @@ layer.visible(true);
 
 // SEED TEXT
 const seedText = new Konva.Text({
-  x: 20,
-  y: 40,
-  fontSize: 15,
-  text: "Available seeds: ",
+  x: 150,
+  y: 320,
+  fontSize: 50,
+  text: "X",
+  fontStyle: "bold",
 });
 textlayer.add(seedText);
-
-
-var berryObj = new Image();
-berryObj.onload = function() {
-  var berryPic = new Konva.Image({
-    x: 0,
-    y: 0,
-    image: berryObj,
-    width: 100,
-    height: 100
-  });
-  textlayer.add(berryObj);
-
-};
-berryObj.src = 'berry.png'
-
 
 stage.add(textlayer);
 
