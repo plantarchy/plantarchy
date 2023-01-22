@@ -11,11 +11,11 @@ async function Index() {
   
   //document.getElementById("body").style.backgroundColor = "#774820"#79e7a4 green
   //document.getElementById("body").style.backgroundColor = "#774820" brown
-  document.getElementById("body").style.backgroundColor = "#b58256" // light brown
 
   document.getElementById("body").style.backgroundColor = "#79e7a4" 
   document.getElementById("berrypic").style.display = "block";
   document.getElementById("seedpic").style.display = "block";
+  document.getElementById("extract").style.visibility = "visible";
 
   const game_code = document.getElementById("game-code").value
   const username = document.getElementById("name-input").value;
@@ -61,6 +61,8 @@ async function Index() {
   console.log(data);
   window.gameID = data.game_id;
   window.playerID = data.player;
+
+  const intervalID = setInterval(myCallback, 100)
 
   await init();
 }
@@ -251,8 +253,6 @@ function update(tile) {
   // console.log("Got update!", tile.x_coord, tile.y_coord)
 }
 
-const intervalID = setInterval(myCallback, 100)
-
 async function myCallback() {
   const res = await fetch(API_URL + "/get_user?player_id=" + window.playerID, {
     method: "GET",
@@ -282,3 +282,24 @@ setInterval(() => {
     "game_id": window.gameID
   })
 }, 500)
+
+async function extract() {
+  console.log("eztract");
+  const res = await fetch(API_URL + "/extract", {
+    method: "GET",
+    headers: {
+      'Accept': 'application/json',
+      'Content-type': 'application/json'
+    },
+  });
+  const data = await res.json();
+
+  if (res === 403) {
+    document.getElementById("berrypic").classList.add("shake");
+    var millisecondsToWait = 300;
+    setTimeout(function() {
+      document.getElementById("berrypic").classList.remove("shake");
+
+    }, millisecondsToWait);
+  }
+}
