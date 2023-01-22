@@ -51,10 +51,6 @@
   </div>
   <img id="berrypic" class="rsb" src="./berry.png" visibility: hidden>
   <img id="seedpic" class="lsb" src="./seed.png" visibility: hidden>
-  <button id="extract" type="button" visibility: hidden>Extract</button>
-  <button id="fertilize" type="button" visibility: hidden>Fertilize</button>
-  <button id="harvest" type="button" visibility: hidden>Harvest</button>
-  <button id="berrybomb" type="button" visibility: hidden>Berry Bomb</button>
 
   <div class="main" id="signup">
     <p class="title" align="center">Plantarchy</p>
@@ -95,7 +91,12 @@
       <script type="text/javascript" src="index.js"></script>
       <button class="submit" onclick="Index();">Sign in!</button>
     </div>  
-    </div>   
+    <button id="extract" onclick="extract();" visibility: hidden>Extract</button>
+      <button id="fertilize" visibility: hidden>Fertilize</button>
+      <button id="harvest" visibility: hidden>Harvest</button>
+      <button id="berrybomb" visibility: hidden>Berry Bomb</button> 
+    </div>  
+  
 </body>
 
 </html>
