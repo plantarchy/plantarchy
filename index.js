@@ -5,6 +5,8 @@ socket.on('connect', () => {
 const log = console.log;
 const API_URL = "https://c829-128-210-107-129.ngrok.io"
 
+let bombMode = false;
+
 async function Index() {
   document.getElementById("konva-holder").style.display = "block";
   document.getElementById("signup").style.display = "none";
@@ -21,6 +23,13 @@ async function Index() {
   document.getElementById("harvest").style.display = "block";
   document.getElementById("berrybomb").style.display = "block";
   document.getElementById("leaderboard").style.display = "block";
+
+  let crosshair = document.getElementById('crosshair');
+  const onMouseMove = (e) =>{
+    crosshair.style.left = e.pageX + 'px';
+    crosshair.style.top = e.pageY + 'px';
+  }
+  document.addEventListener('mousemove', onMouseMove);
 
   const game_code = document.getElementById("game-code").value
   const username = document.getElementById("name-input").value;
@@ -187,8 +196,10 @@ async function init() {
         cellX = (this.x() - GARDEN_X) / garden.cellSize;
         cellY = (this.y() - GARDEN_Y) / garden.cellSize
         console.log("mouse down", cellX, cellY);
-        if (garden.grid[cellX][cellY].crop == 4) {
-          const res = await fetch(API_URL + "/pick_berry", {
+        console.log(bombMode);
+        if (bombMode == true) {
+          console.log("bomb");
+          const res = await fetch(API_URL + "/berry_bomb", {
             method: "POST",
             headers: {
               'Accept': 'application/json',
@@ -201,26 +212,53 @@ async function init() {
               game_uuid: window.gameID,
             })
           });
-        } else {
-          const res = await fetch(API_URL + "/set_tile", {
-            method: "POST",
-            headers: {
-              'Accept': 'application/json',
-              'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-              x: cellX,
-              y: cellY,
-              player_uuid: window.playerID,
-              game_uuid: window.gameID,
-              crop: 2
-            })
-          });
-          if (res.status === 404) {
-            window.location.replace("/plantarchy.html");
+          if (res === 403) {
+            document.getElementById("berrypic").classList.add("shake");
+            var millisecondsToWait = 300;
+            setTimeout(function() {
+              document.getElementById("berrypic").classList.remove("shake");
+
+            }, millisecondsToWait);
           }
-          const data = await res.json();
-          // console.log(data);
+
+          document.getElementById('crosshair').style.visibility = "hidden";
+          bombMode = false;
+        } else {
+          if (garden.grid[cellX][cellY].crop == 4) {
+            const res = await fetch(API_URL + "/pick_berry", {
+              method: "POST",
+              headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+              },
+              body: JSON.stringify({
+                x: cellX,
+                y: cellY,
+                player_uuid: window.playerID,
+                game_uuid: window.gameID,
+              })
+            });
+          } else {
+            const res = await fetch(API_URL + "/set_tile", {
+              method: "POST",
+              headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+              },
+              body: JSON.stringify({
+                x: cellX,
+                y: cellY,
+                player_uuid: window.playerID,
+                game_uuid: window.gameID,
+                crop: 2
+              })
+            });
+            if (res.status === 404) {
+              window.location.replace("/plantarchy.html");
+            }
+            const data = await res.json();
+            // console.log(data);
+          }
         }
       });
       layer.add(gridGroup)
@@ -358,26 +396,8 @@ async function harvest() {
   }
 }*/
 async function berrybomb() {
-  
-  const res = await fetch(API_URL + "/fertilize", {
-    method: "POST",
-    headers: {
-      'Accept': 'application/json',
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      player_uuid: window.playerID,
-      game_uuid: window.gameID,
-    })
-  });
-  const data = await res.json();
+  bombMode = true;
+  document.getElementById("crosshair").style.display = "block";
+  document.getElementById("crosshair").style.visibility = "visible";
 
-  if (res === 403) {
-    document.getElementById("berrypic").classList.add("shake");
-    var millisecondsToWait = 300;
-    setTimeout(function() {
-      document.getElementById("berrypic").classList.remove("shake");
-
-    }, millisecondsToWait);
-  }
 }
