@@ -9,7 +9,8 @@ async function Index() {
   document.getElementById("konva-holder").style.display = "block";
   document.getElementById("signup").style.display = "none";
   //document.getElementById("body").style.backgroundColor = "#774820"#79e7a4 green
-  document.getElementById("body").style.backgroundColor = "#774820" 
+  //document.getElementById("body").style.backgroundColor = "#774820" brown
+  document.getElementById("body").style.backgroundColor = "#b58256" // light brown
 
   const game_code = document.getElementById("game-code").value
   const username = document.getElementById("name-input").value;

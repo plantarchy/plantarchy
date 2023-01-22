@@ -1,10 +1,11 @@
 const YOU = ["#19320a", "#0af064", "#32b464", "#F00A64"];
 const OTHERS = [
-    ["#0a0a32", "#0a0af0", "#0a0af0", "#0a0af0"],
-    ["#320e0a", "#f0250a", "#f0250a", "#f0250a"],
-    ["#331c0a", "#f06e0a", "#f06e0a", "#f06e0a"],
-    ["#332f0a", "#f0d90a", "#f0d90a", "#f0d90a"],
-    ["#240a33", "#9c0af0", "#9c0af0", "#9c0af0"],
+    ["#0a0a32", "#0a0af0", "#0a0af0", "#0a0af0"], // blue
+    ["#320e0a", "#f0250a", "#f0250a", "#f0250a"], // red
+    ["#331c0a", "#f06e0a", "#f06e0a", "#f06e0a"], // dark brown / orange
+    ["#332f0a", "#f0d90a", "#f0d90a", "#f0d90a"], // yellow
+    ["#240a33", "#9c0af0", "#9c0af0", "#9c0af0"], // purple
+    ["#0a3133", "#0bb3bc", "#9c0af0", "#9c0af0"], // light blue
 ]
 const HUE_MAPPING = {};
 
