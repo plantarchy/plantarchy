@@ -2,10 +2,12 @@ const socket = io("wss://c829-128-210-107-129.ngrok.io");
 socket.on('connect', () => {
   window.socketID = socket.id;
 })
+const HARVEST_COOLDOWN = 20;
 const log = console.log;
 const API_URL = "https://c829-128-210-107-129.ngrok.io"
 
 let bombMode = false;
+let harvest_cooldown = HARVEST_COOLDOWN;
 
 async function Index() {
   document.getElementById("konva-holder").style.display = "block";
@@ -318,8 +320,12 @@ async function myCallback() {
   } else {
     berryText.setText("x" + data.berries);
   }
+
+  harvest_cooldown = data.harvest_cooldown;
+
   username = data.player_name || "You";
   land = data.land || 0;
+
   textlayer.draw();  
 }
 
@@ -404,30 +410,31 @@ async function fertilize() {
     }, millisecondsToWait);
   }
 }
-/*
+
 async function harvest() {
-  const res = await fetch(API_URL + "/harvest", {
-    method: "POST",
-    headers: {
-      'Accept': 'application/json',
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      player_uuid: window.playerID,
-      game_uuid: window.gameID,
-    })
-  });
-  const data = await res.json();
-
-  if (res === 403) {
-    document.getElementById("berrypic").classList.add("shake");
-    var millisecondsToWait = 300;
-    setTimeout(function() {
-      document.getElementById("berrypic").classList.remove("shake");
-
-    }, millisecondsToWait);
+  if (harvest_cooldown == 0) {
+    const res = await fetch(API_URL + "/harvest", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        player_uuid: window.playerID,
+        game_uuid: window.gameID,
+      })
+    });
+    const data = await res.json();
+  
+    if (res === 403) {
+      document.getElementById("berrypic").classList.add("shake");
+      var millisecondsToWait = 300;
+      setTimeout(function() {
+        document.getElementById("berrypic").classList.remove("shake");
+      }, millisecondsToWait);
+    }
   }
-}*/
+}
 async function berrybomb() {
   bombMode = true;
   document.getElementById("crosshair").style.display = "block";
