@@ -38,6 +38,14 @@ async function Index() {
   if (res.status === 400) {
     alert("Error 400");
   }
+  if (res.status === 403) {
+        document.getElementById("seedpic").classList.add("shake");
+        var millisecondsToWait = 300;
+        setTimeout(function() {
+          document.getElementById("seedpic").classList.remove("shake");
+
+        }, millisecondsToWait);
+  }
   if (res.status === 404) {
     alert("Error 404");
   }
