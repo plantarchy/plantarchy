@@ -337,7 +337,12 @@ setInterval(async () => {
   data.sort((a, b) => (b.land - a.land))
   let displaySelf = false;
   for (let i = 0; i < 4; i++) {
-    if (i >= data.length) break;
+    if (i >= data.length) {
+      name.innerText = "";
+      score.innerText = "";
+      name.parentNode.style.backgroundColor = "#FFF";
+      continue;
+    };
     const name = document.getElementById("name" + (i+1));
     const score = document.getElementById("score" + (i+1));
     console.log("name" + (i+1), "score" + (i+1))
