@@ -15,7 +15,12 @@ async function Index() {
   document.getElementById("body").style.backgroundColor = "#79e7a4" 
   document.getElementById("berrypic").style.display = "block";
   document.getElementById("seedpic").style.display = "block";
+
   document.getElementById("extract").style.display = "block";
+  document.getElementById("fertilize").style.display = "block";
+  document.getElementById("harvest").style.display = "block";
+  document.getElementById("berrybomb").style.display = "block";
+
 
   const game_code = document.getElementById("game-code").value
   const username = document.getElementById("name-input").value;
@@ -284,13 +289,87 @@ setInterval(() => {
 }, 500)
 
 async function extract() {
-  console.log("eztract");
   const res = await fetch(API_URL + "/extract", {
-    method: "GET",
+    method: "POST",
     headers: {
       'Accept': 'application/json',
       'Content-type': 'application/json'
     },
+    body: JSON.stringify({
+      player_uuid: window.playerID,
+      game_uuid: window.gameID,
+    })
+  });
+  const data = await res.json();
+
+  if (res === 403) {
+    document.getElementById("berrypic").classList.add("shake");
+    var millisecondsToWait = 300;
+    setTimeout(function() {
+      document.getElementById("berrypic").classList.remove("shake");
+
+    }, millisecondsToWait);
+  }
+}
+async function fertilize() {
+  const res = await fetch(API_URL + "/fertilize", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      player_uuid: window.playerID,
+      game_uuid: window.gameID,
+    })
+  });
+  const data = await res.json();
+
+  if (res === 403) {
+    document.getElementById("berrypic").classList.add("shake");
+    var millisecondsToWait = 300;
+    setTimeout(function() {
+      document.getElementById("berrypic").classList.remove("shake");
+
+    }, millisecondsToWait);
+  }
+}
+/*
+async function harvest() {
+  const res = await fetch(API_URL + "/harvest", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      player_uuid: window.playerID,
+      game_uuid: window.gameID,
+    })
+  });
+  const data = await res.json();
+
+  if (res === 403) {
+    document.getElementById("berrypic").classList.add("shake");
+    var millisecondsToWait = 300;
+    setTimeout(function() {
+      document.getElementById("berrypic").classList.remove("shake");
+
+    }, millisecondsToWait);
+  }
+}*/
+async function berrybomb() {
+  
+  const res = await fetch(API_URL + "/fertilize", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      player_uuid: window.playerID,
+      game_uuid: window.gameID,
+    })
   });
   const data = await res.json();
 

@@ -210,6 +210,30 @@ a {
   height: 70px;
 }
 
+.fertilize {
+  position: absolute;
+  top: 600px;
+  left: 30px;
+  width: 350px;
+  height: 70px;
+}
+
+.harvest {
+  position: absolute;
+  top: 700px;
+  left: 30px;
+  width: 350px;
+  height: 70px;
+}
+
+.berrybomb {
+  position: absolute;
+  top: 800px;
+  left: 30px;
+  width: 350px;
+  height: 70px;
+}
+
 /*
 section {
     position: relative;
