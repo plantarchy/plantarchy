@@ -255,39 +255,39 @@ a {
 
 .extract {
   position: absolute;
-  top: 500px;
-  left: 30px;
-  width: 350px;
+  top: 50%;
+  left: 25px;
+  width: 330px;
   height: 70px;
   border-radius: 1.5em;
   background-color: #41ebf7e1;
 }
 
-.fertilize {
-  position: absolute;
-  top: 600px;
-  left: 30px;
-  width: 350px;
-  height: 70px;
-  border-radius: 1.5em;
-  background-color: #25a805;
-}
-
 .harvest {
   position: absolute;
-  top: 700px;
-  left: 30px;
-  width: 350px;
+  top: 60%;
+  left: 25px;
+  width: 330px;
   height: 70px;
   border-radius: 1.5em;
   background-color: #fad400;
 }
 
+.fertilize {
+  position: absolute;
+  top: 70%;
+  left: 25px;
+  width: 330px;
+  height: 70px;
+  border-radius: 1.5em;
+  background-color: #25a805;
+}
+
 .berrybomb {
   position: absolute;
-  top: 800px;
-  left: 30px;
-  width: 350px;
+  top: 80%;
+  left: 25px;
+  width: 330px;
   height: 70px;
   border-radius: 1.5em;
   background-color: #fa0068;
