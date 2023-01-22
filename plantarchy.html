@@ -19,6 +19,7 @@
       #konva-holder {
         height: 100vh;
         width: 100vw;
+        /* margin-left: 150px; */
         display: none;
       }
 
@@ -27,12 +28,25 @@
         top: 4px;
         left: 4px;
       }
+
+      #outer-container {
+        width: 100%;
+        text-align: center;
+      }
+      #inner-container {
+        border: 1px solid black;
+        display: inline-block;
+      }
       
     </style>
 </head>
 
 <body>
-<div id="konva-holder"></div>
+  <div id="outer-container">
+    <div id="inner-container">
+      <div id="konva-holder"></div>
+    </div>
+  </div>
   <div class="main" id="signup">
     <p class="title" align="center">Plantarchy</p>
 
