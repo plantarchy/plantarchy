@@ -110,7 +110,7 @@ const berryText = new Konva.Text({
   x: 150,
   y: 110,
   fontSize: 50,
-  text: "X",
+  text: "X ",
   fontStyle: "bold",
 });
 textlayer.add(berryText);
@@ -123,7 +123,7 @@ const seedText = new Konva.Text({
   x: 150,
   y: 320,
   fontSize: 50,
-  text: "X",
+  text: "X ",
   fontStyle: "bold",
 });
 textlayer.add(seedText);
