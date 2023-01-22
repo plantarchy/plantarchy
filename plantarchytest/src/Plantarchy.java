@@ -25,9 +25,5 @@ public class Plantarchy {
             }
         }
     }
-
-
-
-
 }
 
