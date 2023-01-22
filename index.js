@@ -8,6 +8,9 @@ const API_URL = "https://c829-128-210-107-129.ngrok.io"
 async function Index() {
   document.getElementById("konva-holder").style.display = "block";
   document.getElementById("signup").style.display = "none";
+  //document.getElementById("body").style.backgroundColor = "#774820" brown
+  document.getElementById("body").style.backgroundColor = "#79e7a4" 
+
   const game_code = document.getElementById("game-code").value
   const username = document.getElementById("name-input").value;
   console.log(document.getElementById("name-input").value);
@@ -46,14 +49,18 @@ const stage = new Konva.Stage({
   width: window.innerWidth,
   container: "konva-holder",
 });
+console.log("HEIGHT:", window.innerHeight)
 
 
 // LAYER
-const layer = new Konva.Layer();
+const layer = new Konva.Layer({
+  x: Math.floor(window.innerWidth*0.25),
+  y: 50,
+});
 stage.add(layer);
 // const for the grid
-const GARDEN_X = 50;
-const GARDEN_Y = 50;
+const GARDEN_X = 0;
+const GARDEN_Y = 0;
 
 // GRID GROUP
 const gridGroup = new Konva.Group({
@@ -62,9 +69,56 @@ const gridGroup = new Konva.Group({
 layer.add(gridGroup);
 
 
-let garden = new Garden(35,35,25);
+let garden = new Garden(35,35,Math.floor(window.innerHeight/40));
 window.garden = garden;
 // double for to create every grid in the window
+
+
+
+var textlayer = new Konva.Layer();
+
+// BERRY TEXT
+const berryText = new Konva.Text({
+  x: 20,
+  y: 20,
+  fontSize: 15,
+  text: "Berry count: ",
+});
+textlayer.add(berryText);
+
+textlayer.visible(true);
+layer.visible(true);
+
+// SEED TEXT
+const seedText = new Konva.Text({
+  x: 20,
+  y: 40,
+  fontSize: 15,
+  text: "Available seeds: ",
+});
+textlayer.add(seedText);
+
+
+var berryObj = new Image();
+berryObj.onload = function() {
+  var berryPic = new Konva.Image({
+    x: 0,
+    y: 0,
+    image: berryObj,
+    width: 100,
+    height: 100
+  });
+  textlayer.add(berryObj);
+
+};
+berryObj.src = 'berry.png'
+
+
+stage.add(textlayer);
+
+textlayer.draw();
+
+
 
 async function init() {
 
@@ -190,47 +244,3 @@ function update(tile) {
   garden.grid[tile.x_coord][tile.y_coord].cell.draw();
   // console.log("Got update!", tile.x_coord, tile.y_coord)
 }
-
-var textlayer = new Konva.Layer();
-
-// BERRY TEXT
-const berryText = new Konva.Text({
-  x: 20,
-  y: 20,
-  fontSize: 15,
-  text: "Berry count: ",
-});
-textlayer.add(berryText);
-
-textlayer.visible(true);
-layer.visible(true);
-
-// SEED TEXT
-const seedText = new Konva.Text({
-  x: window.innerWidth - 175,
-  y: 20,
-  fontSize: 15,
-  text: "Available seeds: ",
-});
-textlayer.add(seedText);
-
-
-
-var berryObj = new Image();
-berryObj.onload = function() {
-  var berryPic = new Konva.Image({
-    x: 0,
-    y: 0,
-    image: berryObj,
-    width: 100,
-    height: 100
-  });
-  textlayer.add(berryObj);
-
-};
-berryObj.src = 'berry.png'
-
-
-stage.add(textlayer);
-
-textlayer.draw();

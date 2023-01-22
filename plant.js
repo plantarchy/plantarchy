@@ -22,7 +22,7 @@ class Plant {
     setCrop(crop) {
         switch (crop) {
             case 0:
-                this.color = "#000000";
+                this.color = "#512b0a";
                 break;
             case 1:
                 if (this.owner == window.playerID) {
