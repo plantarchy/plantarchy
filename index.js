@@ -162,15 +162,20 @@ async function init() {
 }
 
 function handleNewPlayer(player) {
-  console.log("New Player", player
-  )
-  let hue = COLOR_HUES[Math.floor(Math.random * COLOR_HUES.length)];
+  console.log("New Player", player)
+
+  let id = player.playerID;
+
+  /*let hue = COLOR_HUES[Math.floor(Math.random * COLOR_HUES.length)];
   HUE_MAPPING[player.id] = hue;
   COLOR_HUES.splice(COLOR_HUES.findIndex(hue), 1);
-  window.HUE_MAPPING = HUE_MAPPING;
+  window.HUE_MAPPING = HUE_MAPPING;*/
 }
 
 function handleLeavePlayer(player) {
+
+  let id = player.playerID;
+
   let hue = HUE_MAPPING[player.id];
   delete HUE_MAPPING[player.id];
   COLOR_HUES.push(hue);
