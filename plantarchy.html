@@ -49,14 +49,15 @@
       <div id="konva-holder"></div>
     </div>
   </div>
-  <img id="berrypic" class="rsb" src="./berry.png" visibility: hidden>
-  <img id="seedpic" class="lsb" src="./seed.png" visibility: hidden>
+  <img id="berrypic" class="berry" src="./berry.png" visibility: hidden>
+  <img id="seedpic" class="seed" src="./seed.png" visibility: hidden>
   <div class="main" id="signup">
     <p class="title" align="center">Plantarchy</p>
 
-    <img id="image" class="jk animated" src="./happyPlantShovel.png">
+    <img id="image" class="logo animated" src="./happyPlantShovel.png">
 
     <script>
+      // makes the logo shake when mouse over & turn to the evil
       document.getElementById("image").addEventListener("mouseover", function() {
         document.getElementById("image").src="./angryDevilPlant.png";
         document.getElementById("image").classList.add("shake");
@@ -68,6 +69,7 @@
         }, millisecondsToWait);
 
       });
+      // makes the logo shake when mouse moves off & turn to the nice
       document.getElementById("image").addEventListener("mouseout", function() {
         document.getElementById("image").src="./happyPlantShovel.png";
         document.getElementById("image").classList.add("shake");
@@ -80,8 +82,8 @@
       });
     </script>  
     <div class="form1">
-      <input id="name-input" class="un" type="text" align="center" placeholder="Nickname">
-      <input id="game-code" class="gc" type="text" align="center" placeholder="Game Code">
+      <input id="name-input" class="username" type="text" align="center" placeholder="Nickname">
+      <input id="game-code" class="gamecode" type="text" align="center" placeholder="Game Code">
       
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
       <script type="text/javascript" src="plant.js"></script>
@@ -90,12 +92,13 @@
       <button class="submit" onclick="Index();">Sign in!</button>
     </div>  
     </div>  
+    <!-- adds the buttons to screen with descriptions -->
     <button class="harvest" id="harvest" onclick="harvest();" visibility: hidden><b>Harvest</b><br>Cost: 30 tick cooldown<br>Harvest all berries!</button>
     <button class="extract" id="extract" onclick="extract();" visibility: hidden><b>Extract</b><br>Cost: 10 Berries<br>Exchange some berries for 5 seeds!</button>
     <button class="berrybomb" id="berrybomb" onclick="berrybomb();" visibility: hidden><b>Berry Bomb</b><br>Cost: 15 Berries<br>Annihilate all plants in a 5 x 5 grid!</button>
     <button class="fertilize" id="fertilize" onclick="fertilize();" visibility: hidden><b>Fertilize</b><br>Cost: 30 Berries<br>Drastically increase your crops's spread rate!</button>
 
-    <div class="lb" id="leaderboard" visibility: hidden>
+    <div class="leaderboard" id="leaderboard" visibility: hidden>
       <div class="row">
         Leaderboard<div class="name"></div><div class="score"></div>
       </div>
