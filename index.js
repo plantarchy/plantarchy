@@ -1,10 +1,17 @@
-const socket = io("wss://c829-128-210-107-129.ngrok.io");
+// ngrok for dedicated server
+//const socket = io("wss://c829-128-210-107-129.ngrok.io");
+const socket = io("wss://144.202.60.236:5000/");
+
 socket.on('connect', () => {
   window.socketID = socket.id;
 })
 const HARVEST_COOLDOWN = 20;
 const log = console.log;
-const API_URL = "https://c829-128-210-107-129.ngrok.io"
+// ngrok is for dedicated server
+// const API_URL = "https://c829-128-210-107-129.ngrok.io"
+
+// this is for local server
+const API_URL = "http://144.202.60.236:5000/"
 
 let bombMode = false;
 let berries = 0;
@@ -151,7 +158,7 @@ async function init() {
       garden.grid[data[i].x_coord][data[i].y_coord] = new Plant(data[i].player_uuid, data[i].crop);
     }
   }
-
+  // creates the grid using Konva JS rect and groups them
   for (let w = 0; w < garden.width; w++) {
     for (let h = 0; h < garden.height; h++) {
 
@@ -165,7 +172,7 @@ async function init() {
         strokeWidth: 2
 
       });
-
+      // adds to group so they can be moved together
       gridGroup.add(cell);
 
       if (garden.grid[w][h] == null) {
@@ -199,6 +206,8 @@ async function init() {
               game_uuid: window.gameID,
             })
           });
+          // i dont think we need this error here right?
+          // if user runs out of berries and tries to purchase something
           if (res === 403) {
             document.getElementById("berrypic").classList.add("shake");
             var millisecondsToWait = 300;
@@ -239,6 +248,7 @@ async function init() {
                 crop: 2
               })
             });
+            // if the user runs out of seeds and attempts to place them
             if (res.status === 418) {
               document.getElementById("seedpic").classList.add("shake-trigger");
               var millisecondsToWait = 600;
@@ -247,6 +257,7 @@ async function init() {
           
               }, millisecondsToWait);
             }
+            // if server error user is sent back to the home page
             if (res.status === 404) {
               window.location.replace("/plantarchy.html");
             }
@@ -261,6 +272,7 @@ async function init() {
   layer.draw();
 }
 
+// allows new players to connect and selects the color they will be associated with on others view
 function handleNewPlayer(player) {
   console.log("New Player", player)
   if (player.id == window.playerID) return;
@@ -273,6 +285,7 @@ function handleNewPlayer(player) {
   window.HUE_MAPPING = HUE_MAPPING;
 }
 
+// ensures that when players leave the color is removed from the used colors
 function handleLeavePlayer(player) {
   let id = player.id;
 
@@ -387,6 +400,7 @@ async function extract() {
   });
   const data = await res.json();
 
+  // if user is out of berries and and tries to purchase something
   if (res.status === 403) {
     console.log(res.status);
     document.getElementById("berrypic").classList.add("shake-trigger");
@@ -413,6 +427,7 @@ async function harvest() {
     });
     const data = await res.json();
   
+    // if user is out of berries and and tries to purchase something
     if (res.status === 403) {
       console.log(res.status);
       document.getElementById("berrypic").classList.add("shake-trigger");
@@ -439,7 +454,7 @@ async function fertilize() {
   });
   const data = await res.json();
 
-  console.log(res.status);
+  // if user is out of berries and and tries to purchase something
   if (res.status === 403) {
     console.log(res.status);
     document.getElementById("berrypic").classList.add("shake-trigger");
@@ -451,13 +466,15 @@ async function fertilize() {
   }
 }
 
-
+// BERRY BOMB
 async function berrybomb() {
+  // we need 
   if (berries >= 15) {
     bombMode = true;
     document.getElementById("crosshair").style.display = "block";
     document.getElementById("crosshair").style.visibility = "visible";
   } else {
+    // if user is out of berries and and tries to purchase something
     document.getElementById("berrypic").classList.add("shake-trigger");
     var millisecondsToWait = 600;
     setTimeout(function() {
